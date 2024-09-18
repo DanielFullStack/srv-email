@@ -1,0 +1,24 @@
+services:
+  srv-email:
+    image: srv-email:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: srv-email
+    ports:
+      - "8080:8080"
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_PORT=${MAIL_PORT}
+      - MAIL_USERNAME=${MAIL_USERNAME}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - MAIL_TRANSPORT_PROTOCOL=${MAIL_TRANSPORT_PROTOCOL}
+      - MAIL_SMTP_AUTH=${MAIL_SMTP_AUTH}
+      - MAIL_SMTP_STARTTLS_ENABLE=${MAIL_SMTP_STARTTLS_ENABLE}
+      - MAIL_SMTP_STARTTLS_REQUIRED=${MAIL_SMTP_STARTTLS_REQUIRED}
+      - MAIL_SMTP_SSL_ENABLE=${MAIL_SMTP_SSL_ENABLE}
+      - MAIL_SMTP_CONNECTION_TIMEOUT=${MAIL_SMTP_CONNECTION_TIMEOUT}
+      - MAIL_SMTP_TIMEOUT=${MAIL_SMTP_TIMEOUT}
+      - MAIL_SMTP_WRITE_TIMEOUT=${MAIL_SMTP_WRITE_TIMEOUT}
+      - MAIL_DEBUG=${MAIL_DEBUG}
