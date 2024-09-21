@@ -1,18 +1,20 @@
 package com.backend.srv.email.config;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.Properties;
 
-@Slf4j
 @Configuration
 public class EmailConfig {
+
+    private final Logger logger = LogManager.getLogger(this.getClass());
 
     @Value("${spring.mail.host}")
     private String mailHost;
@@ -51,7 +53,7 @@ public class EmailConfig {
     private String timeout;
 
     @Value("${spring.mail.properties.mail.smtp.writetimeout}")
-    private String writeTimeout;    
+    private String writeTimeout;
 
     @Bean
     public JavaMailSender mailSender() {
@@ -68,15 +70,15 @@ public class EmailConfig {
         mailSender.setJavaMailProperties(props);
 
         // Log das propriedades do mailSender
-        log.info("Mail Sender Properties:");
-        log.info("Host: " + mailSender.getHost());
-        log.info("Port: " + mailSender.getPort());
-        log.info("Username: " + mailSender.getUsername());
-        log.info("Protocol: " + mailSender.getProtocol());
+        logger.info("Mail Sender Properties:");
+        logger.info("Host: " + mailSender.getHost());
+        logger.info("Port: " + mailSender.getPort());
+        logger.info("Username: " + mailSender.getUsername());
+        logger.info("Protocol: " + mailSender.getProtocol());
 
         // Log das propriedades de props
-        log.info("\nMail Properties:");
-        props.forEach((key, value) -> log.info(key + ": " + value));
+        logger.info("\nMail Properties:");
+        props.forEach((key, value) -> logger.info(key + ": " + value));
 
         return mailSender;
     }
