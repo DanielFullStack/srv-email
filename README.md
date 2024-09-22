@@ -66,6 +66,15 @@ Run mvn test to execute the unit tests.
 
 ### Build/Run
 
+#### Network
+```
+docker network create images-network
+```
+
+#### Images
+Repository: [images](https://github.com/DanielFullStack/images)
+
+#### Service
 ```
 docker compose up --build -d
 ```

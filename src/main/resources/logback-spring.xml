@@ -1,13 +1,13 @@
 <configuration>
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
-        </encoder>
+    <springProperty scope="context" name="logstash.host" source="logstash.host"/>
+    <springProperty scope="context" name="logstash.port" source="logstash.port"/>
+
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>${logstash.host}:${logstash.port}</destination>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
     </appender>
 
-    <logger name="com.condoconnect" level="DEBUG" />
-
     <root level="INFO">
-        <appender-ref ref="console" />
+        <appender-ref ref="logstash" />
     </root>
 </configuration>

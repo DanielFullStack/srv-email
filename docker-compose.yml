@@ -22,3 +22,9 @@ services:
       - MAIL_SMTP_TIMEOUT=${MAIL_SMTP_TIMEOUT}
       - MAIL_SMTP_WRITE_TIMEOUT=${MAIL_SMTP_WRITE_TIMEOUT}
       - MAIL_DEBUG=${MAIL_DEBUG}
+    networks:
+      - images-network
+
+networks:
+  images-network:
+    external: true
