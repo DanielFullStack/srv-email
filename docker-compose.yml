@@ -22,6 +22,8 @@ services:
       - MAIL_SMTP_TIMEOUT=${MAIL_SMTP_TIMEOUT}
       - MAIL_SMTP_WRITE_TIMEOUT=${MAIL_SMTP_WRITE_TIMEOUT}
       - MAIL_DEBUG=${MAIL_DEBUG}
+      - LOGGING_HOST=${LOGGING_HOST}
+      - LOGGING_PORT=${LOGGING_PORT}
     networks:
       - images-network
 
