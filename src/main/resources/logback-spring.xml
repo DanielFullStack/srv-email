@@ -1,6 +1,9 @@
 <configuration>
+    <springProperty scope="context" name="logstash.host" source="logstash.host"/>
+    <springProperty scope="context" name="logstash.port" source="logstash.port"/>
+
     <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>logstash:5000</destination>
+        <destination>${logstash.host}:${logstash.port}</destination>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
     </appender>
 
