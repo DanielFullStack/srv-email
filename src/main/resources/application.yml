@@ -25,5 +25,5 @@ spring:
           write-timeout: "${MAIL_SMTP_WRITE_TIMEOUT:}"
         debug: "${MAIL_DEBUG:}"
 logstash:
-  host: "${LOGGING_HOST:logstash}"
-  port: "${LOGGING_PORT:5000}"
+  host: "${LOGGING_HOST:}"
+  port: "${LOGGING_PORT:}"
