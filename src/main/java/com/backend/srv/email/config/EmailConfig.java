@@ -89,8 +89,8 @@ public class EmailConfig {
         props.put("mail.smtp.starttls.required", starttlsRequired);
         props.put("mail.smtp.ssl.enable", sslEnable);
         props.put("mail.debug", mailDebug);
-        props.put("mail.smtp.connectiontimeout", Integer.parseInt(connectionTimeout));
-        props.put("mail.smtp.timeout", Integer.parseInt(timeout));
-        props.put("mail.smtp.writetimeout", Integer.parseInt(writeTimeout));
+        props.put("mail.smtp.connectiontimeout", connectionTimeout);
+        props.put("mail.smtp.timeout", timeout);
+        props.put("mail.smtp.writetimeout", writeTimeout);
     }
 }
