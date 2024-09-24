@@ -40,7 +40,7 @@ services:
     entrypoint: ["sh", "-c", "chmod +x ./run-sonar-analysis.sh && ./run-sonar-analysis.sh"]
     networks:
       - images-network
-
+    restart: "no"
 
 networks:
   images-network:

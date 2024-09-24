@@ -177,5 +177,5 @@ mvn clean verify sonar:sonar \
 ### Localhost
 
 ```bash
-mvn clean install -Dspring.profiles.active=test
+mvn clean install -Dspring.profiles.active=local
 ```
