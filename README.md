@@ -161,18 +161,13 @@ Para executar a análise de qualidade do código:
 mvn clean install
 
 mvn dependency-check:aggregate -PsonarReports
+```
 
+### Após adicionar projeto no SonarQube
+
+```bash
 mvn clean verify sonar:sonar \
   -Dsonar.projectKey=srv-email \
   -Dsonar.host.url=http://localhost:9001 \
-  -Dsonar.login=sqp_31eb928d3776eb1dfb5d70e0f52fcfb5f1b25c89
-```
-ou
-
-```
-mvn clean verify sonar:sonar \
-  -Dsonar.projectKey=srv-email \
-  -Dsonar.host.url=http://localhost:9001 \
-  -Dsonar.login=admin \
-  -Dsonar.password=imagesAdmin
+  -Dsonar.login=sqp_d1a747c7a06ac4caa1701f61029bab0c2a26060f
 ```
