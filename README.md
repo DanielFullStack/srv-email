@@ -173,3 +173,9 @@ mvn clean verify sonar:sonar \
   -Dsonar.host.url=http://sonarqube:9000 \
   -Dsonar.login=sqp_ca71748542583fd0709ab1b2c1d7bd50b9b4ad79
 ```
+
+### Localhost
+
+```bash
+mvn clean install -Dspring.profiles.active=test
+```
