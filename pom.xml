@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.backend.srv</groupId>
-	<artifactId>srv-email</artifactId>
+	<artifactId>srv_email</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>srv-email</name>
+	<name>srv_email</name>
 	<description>Demo project for Spring Boot</description>
 	<url />
 	<licenses>

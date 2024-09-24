@@ -1,7 +1,7 @@
-package com.backend.srv.email.controller;
+package com.backend.srv.srv_email.controller;
 
-import com.backend.srv.email.dto.EmailRequest;
-import com.backend.srv.email.service.EmailService;
+import com.backend.srv.srv_email.dto.EmailRequest;
+import com.backend.srv.srv_email.service.EmailService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
