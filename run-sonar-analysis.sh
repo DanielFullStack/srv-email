@@ -16,3 +16,6 @@ mvn clean verify sonar:sonar \
   -Dsonar.login=sqp_ca71748542583fd0709ab1b2c1d7bd50b9b4ad79
 
 echo "Análise de qualidade de código concluída com sucesso!"
+
+# Certifique-se de que o script termine corretamente
+exit 0

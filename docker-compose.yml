@@ -29,9 +29,9 @@ services:
       - SONAR_PORT=${SONAR_PORT}
     networks:
       - images-network
-  sonar-analysis:
+  srv-email_sonar-analysis:
     image: maven:3.8.4-openjdk-17
-    container_name: sonar-analysis
+    container_name: srv-email_sonar-analysis
     depends_on:
       - srv-email
     volumes:
