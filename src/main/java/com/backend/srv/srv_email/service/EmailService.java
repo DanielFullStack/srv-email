@@ -1,4 +1,4 @@
-package com.backend.srv.email.service;
+package com.backend.srv.srv_email.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

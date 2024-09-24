@@ -1,4 +1,4 @@
-package com.backend.srv.email.service;
+package com.backend.srv.srv_email.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

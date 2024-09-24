@@ -1,4 +1,4 @@
-package com.backend.srv.email.config;
+package com.backend.srv.srv_email.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

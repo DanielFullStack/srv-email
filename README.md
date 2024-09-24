@@ -35,7 +35,7 @@ Certifique-se de ter instalado:
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/DanielFullStack/srv-email.git
+   git clone https://github.com/DanielFullStack/srv_email.git
    ```
 2. Navegue até o diretório do projeto:
    ```bash
@@ -128,13 +128,13 @@ Certifique-se de ter o SonarQube configurado e em execução na mesma rede Docke
 
 `run-sonar-analysis.sh`
 
-Atualize a chave de login com o que foi obtido na configuração do projeto `srv-email` no SonarQube.
+Atualize a chave de login com o que foi obtido na configuração do projeto `srv_email` no SonarQube.
 
 ### Após adicionar projeto no SonarQube
 
 ```bash
 mvn clean verify sonar:sonar \
-  -Dsonar.projectKey=srv-email \
+  -Dsonar.projectKey=srv_email \
   -Dsonar.host.url=http://sonarqube:9000 \
   -Dsonar.login=sqp_ca71748542583fd0709ab1b2c1d7bd50b9b4ad79
 ```
@@ -153,9 +153,9 @@ mvn dependency-check:aggregate -PsonarReports
 
 ```bash
 mvn clean -Dspring.profiles.active=local verify sonar:sonar \
-  -Dsonar.projectKey=srv-email \
+  -Dsonar.projectKey=srv_email \
   -Dsonar.host.url=http://localhost:9000 \
-  -Dsonar.login=sqp_ca71748542583fd0709ab1b2c1d7bd50b9b4ad79
+  -Dsonar.login=sqp_8f434f195c0fc33dfedac1260c193252d5d8a0e5
 ```
 
 ## Docker
@@ -177,11 +177,11 @@ Este projeto depende de outras imagens Docker que estão disponíveis no reposit
 Para construir e executar o serviço em background usando Docker Compose:
 
 ```bash
-docker compose up srv-email --build -d && docker compose run --rm srv-email_sonar-analysis
+docker compose up srv_email --build -d && docker compose run --rm srv_email_sonar-analysis
 ```
 
 O serviço será executado no modo detach (em segundo plano). Você pode verificar os logs usando:
 
 ```bash
-docker logs srv-email
+docker logs srv_email
 ```

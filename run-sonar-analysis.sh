@@ -11,9 +11,9 @@ mvn dependency-check:aggregate -PsonarReports
 
 # 3. Executar a análise do SonarQube
 mvn clean verify sonar:sonar \
-  -Dsonar.projectKey=srv-email \
+  -Dsonar.projectKey=srv_email \
   -Dsonar.host.url=http://sonarqube:9000 \
-  -Dsonar.login=sqp_ca71748542583fd0709ab1b2c1d7bd50b9b4ad79
+  -Dsonar.login=sqp_8f434f195c0fc33dfedac1260c193252d5d8a0e5
 
 echo "Análise de qualidade de código concluída com sucesso!"
 

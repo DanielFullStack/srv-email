@@ -1,6 +1,6 @@
 spring:
   application:
-    name: srv-email
+    name: srv_email
   profiles:
     active: "${ENVIRONMENT:}"
   config:

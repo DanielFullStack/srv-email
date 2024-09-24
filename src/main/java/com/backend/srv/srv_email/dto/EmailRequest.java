@@ -1,4 +1,4 @@
-package com.backend.srv.email.dto;
+package com.backend.srv.srv_email.dto;
 
 import lombok.Data;
 
