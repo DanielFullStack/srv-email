@@ -36,3 +36,6 @@ build/
 ### Enviroment
 .env
 .env-local
+
+### Sonar
+owasp-dependency-check-logs/
