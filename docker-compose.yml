@@ -29,6 +29,18 @@ services:
       - SONAR_PORT=${SONAR_PORT}
     networks:
       - images-network
+  sonar-analysis:
+    image: maven:3.8.4-openjdk-17
+    container_name: sonar-analysis
+    depends_on:
+      - srv-email
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    entrypoint: ["sh", "-c", "chmod +x ./run-sonar-analysis.sh && ./run-sonar-analysis.sh"]
+    networks:
+      - images-network
+
 
 networks:
   images-network:

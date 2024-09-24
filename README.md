@@ -154,7 +154,9 @@ Certifique-se de ter o SonarQube configurado e em execução na mesma rede Docke
 
 ### SonarQube Analyze
 
-Analyze "srv-email": sqp_31eb928d3776eb1dfb5d70e0f52fcfb5f1b25c89
+`run-sonar-analysis.sh`
+
+Atualize a chave de login com o que foi obtido na configuração do projeto `srv-email` no SonarQube.
 
 Para executar a análise de qualidade do código:
 ```bash
@@ -168,6 +170,6 @@ mvn dependency-check:aggregate -PsonarReports
 ```bash
 mvn clean verify sonar:sonar \
   -Dsonar.projectKey=srv-email \
-  -Dsonar.host.url=http://localhost:9001 \
-  -Dsonar.login=sqp_d1a747c7a06ac4caa1701f61029bab0c2a26060f
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.login=sqp_ca71748542583fd0709ab1b2c1d7bd50b9b4ad79
 ```
