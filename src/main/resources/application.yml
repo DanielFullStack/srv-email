@@ -4,7 +4,9 @@ spring:
   profiles:
     active: "${ENVIRONMENT:}"
   config:
-    import: optional:file:.env[.properties]
+    import: 
+      - optional:file:.env[.properties]  # Arquivo padrão
+      - optional:file:.env-${spring.profiles.active}  # Arquivo específico baseado no perfil ativo
   mail:
     host: "${MAIL_HOST:}"
     port: "${MAIL_PORT:}"
@@ -27,3 +29,7 @@ spring:
 logstash:
   host: "${LOGGING_HOST:}"
   port: "${LOGGING_PORT:}"
+
+sonarqube:
+  host: "${SONAR_HOST:}"
+  port: "${SONAR_PORT:}"

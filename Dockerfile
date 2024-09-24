@@ -7,6 +7,6 @@ RUN ls -la /usr/src/app/target
 
 # Stage 2: Run
 FROM openjdk:17-alpine
-COPY --from=build /usr/src/app/target/email-0.0.1-SNAPSHOT.jar /usr/app/srv-email.jar
+COPY --from=build /usr/src/app/target/srv-email-0.0.1-SNAPSHOT.jar /usr/app/srv-email.jar
 WORKDIR /usr/app
 ENTRYPOINT ["java", "-jar", "/usr/app/srv-email.jar"]
