@@ -102,34 +102,6 @@ Os testes cobrem as funcionalidades principais do serviço de e-mail e garantem 
 - **Swagger** - Documentação interativa da API
 - **Maven** - Ferramenta de build e gerenciamento de dependências
 
-## Docker
-
-### Construção e Execução com Docker
-
-#### 1. Configurar Rede Docker (Opcional, se necessário)
-Crie uma rede Docker para conectar este serviço a outros containers, como o SonarQube:
-
-```bash
-docker network create images-network
-```
-
-#### 2. Imagens Docker
-Este projeto depende de outras imagens Docker que estão disponíveis no repositório [images](https://github.com/DanielFullStack/images).
-
-#### 3. Build e Execução do Serviço
-
-Para construir e executar o serviço em background usando Docker Compose:
-
-```bash
-docker compose up --build -d
-```
-
-O serviço será executado no modo detach (em segundo plano). Você pode verificar os logs usando:
-
-```bash
-docker logs <container_id>
-```
-
 ## Documentação Swagger
 
 A documentação Swagger para os endpoints da API está disponível em:
@@ -158,13 +130,6 @@ Certifique-se de ter o SonarQube configurado e em execução na mesma rede Docke
 
 Atualize a chave de login com o que foi obtido na configuração do projeto `srv-email` no SonarQube.
 
-Para executar a análise de qualidade do código:
-```bash
-mvn clean install
-
-mvn dependency-check:aggregate -PsonarReports
-```
-
 ### Após adicionar projeto no SonarQube
 
 ```bash
@@ -174,8 +139,49 @@ mvn clean verify sonar:sonar \
   -Dsonar.login=sqp_ca71748542583fd0709ab1b2c1d7bd50b9b4ad79
 ```
 
-### Localhost
+## Localhost
+
+### Construção e Execução Local
 
 ```bash
 mvn clean install -Dspring.profiles.active=local
+```
+
+```bash
+mvn dependency-check:aggregate -PsonarReports
+```
+
+```bash
+mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=srv-email \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.login=sqp_ca71748542583fd0709ab1b2c1d7bd50b9b4ad79
+```
+
+## Docker
+
+### Construção e Execução com Docker
+
+#### 1. Configurar Rede Docker
+Crie uma rede Docker para conectar este serviço a outros containers, como o SonarQube:
+
+```bash
+docker network create images-network
+```
+
+#### 2. Imagens Docker
+Este projeto depende de outras imagens Docker que estão disponíveis no repositório [images](https://github.com/DanielFullStack/images).
+
+#### 3. Build e Execução do Serviço
+
+Para construir e executar o serviço em background usando Docker Compose:
+
+```bash
+docker compose up srv-email --build -d && docker compose run --rm srv-email_sonar-analysis
+```
+
+O serviço será executado no modo detach (em segundo plano). Você pode verificar os logs usando:
+
+```bash
+docker logs srv-email
 ```
