@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.backend.srv</groupId>
-	<artifactId>email</artifactId>
+	<artifactId>srv-email</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>email</name>
+	<name>srv-email</name>
 	<description>Demo project for Spring Boot</description>
 	<url />
 	<licenses>
@@ -29,6 +29,24 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
+		<jacoco.version>0.8.11</jacoco.version>
+		<sonar.exclusions>**/schemas/**,**/config/**</sonar.exclusions>
+		<sonar.coverage.exclusions>**/schemas/**,**/config/**,src/test/**/*</sonar.coverage.exclusions>
+
+		<sonar.dependencyCheck.basePath>
+            ${project.basedir}/owasp-dependency-check-logs
+        </sonar.dependencyCheck.basePath>
+        <sonar.dependencyCheck.htmlReportPath>
+            ${sonar.dependencyCheck.basePath}/dependency-check-report.html
+        </sonar.dependencyCheck.htmlReportPath>
+        <sonar.dependencyCheck.jsonReportPath>
+            ${sonar.dependencyCheck.basePath}/dependency-check-report.json
+        </sonar.dependencyCheck.jsonReportPath>
+        <sonar.dependencyCheck.summarize>true</sonar.dependencyCheck.summarize>
+
+        <sonar.sources>src,pom.xml</sonar.sources>
+        <sonar.test.inclusions>src/test/**/*</sonar.test.inclusions>
+        <sonar.tests>src</sonar.tests>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -60,7 +78,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
-			<version>3.3.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -71,6 +88,11 @@
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>2.6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>${jacoco.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -95,7 +117,78 @@
 					<addResources>true</addResources>
 				</configuration>
 			</plugin>
+			<plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.9.1.2184</version>
+            </plugin>
+			<plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <id>jacoco-initialize</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-site</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.0</version>
+            </plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>sonarReports</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.owasp</groupId>
+						<artifactId>dependency-check-maven</artifactId>
+						<version>6.5.3</version>
+						<configuration>
+							<mavenSettingsProxyId>https-p</mavenSettingsProxyId>
+							<outputDirectory>${sonar.dependencyCheck.basePath}</outputDirectory>
+							<formats>
+								<format>html</format>
+								<format>json</format>
+							</formats>
+						</configuration>
+						<executions>
+							<execution>
+								<id>generate-dependency-check-report</id>
+								<goals>
+									<goal>aggregate</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
