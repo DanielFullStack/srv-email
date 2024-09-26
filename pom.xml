@@ -94,6 +94,10 @@
 			<artifactId>jacoco-maven-plugin</artifactId>
 			<version>${jacoco.version}</version>
 		</dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
 	</dependencies>
 
 	<build>
@@ -115,6 +119,10 @@
 						</exclude>
 					</excludes>
 					<addResources>true</addResources>
+					<profiles>
+						<profile>dev</profile>
+						<profile>local</profile>
+					  </profiles>
 				</configuration>
 			</plugin>
 			<plugin>
