@@ -118,9 +118,9 @@ Este projeto integra-se com o SonarQube para análise de qualidade e segurança 
 
 ### Acesso ao SonarQube
 
-- **URL**: `http://localhost:9001`
+- **URL**: `http://localhost:9000`
 - **Usuário**: `admin`
-- **Senha**: `imagesAdmin`
+- **Senha**: `admin`
 
 Certifique-se de ter o SonarQube configurado e em execução na mesma rede Docker ou acessível para o serviço.
 
@@ -177,7 +177,12 @@ Este projeto depende de outras imagens Docker que estão disponíveis no reposit
 Para construir e executar o serviço em background usando Docker Compose:
 
 ```bash
-docker compose up srv_email --build -d && docker compose run --rm srv_email_sonar-analysis
+docker compose up srv_email --build -d
+```
+
+#### 4. Análise do SonarQube
+```bash
+docker compose run --rm srv_email_sonar-analysis
 ```
 
 O serviço será executado no modo detach (em segundo plano). Você pode verificar os logs usando:

@@ -26,6 +26,10 @@ spring:
           timeout: "${MAIL_SMTP_TIMEOUT:}"
           write-timeout: "${MAIL_SMTP_WRITE_TIMEOUT:}"
         debug: "${MAIL_DEBUG:}"
+  data:
+    mongodb:
+      uri: "${MONGODB_URI:}"
+
 logstash:
   host: "${LOGGING_HOST:}"
   port: "${LOGGING_PORT:}"
