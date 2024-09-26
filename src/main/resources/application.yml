@@ -5,8 +5,8 @@ spring:
     active: "${ENVIRONMENT:}"
   config:
     import: 
-      - optional:file:.env[.properties]  # Arquivo padrão
-      - optional:file:.env-${spring.profiles.active}  # Arquivo específico baseado no perfil ativo
+      - optional:file:.env[.properties]
+      - optional:file:.env-${spring.profiles.active}
   mail:
     host: "${MAIL_HOST:}"
     port: "${MAIL_PORT:}"

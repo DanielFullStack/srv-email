@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
 @SpringBootApplication
-public class EmailApplication {
+public class SrvEmailApplication {
 
 	private final Logger logger = LogManager.getLogger(this.getClass());
 
@@ -19,13 +18,13 @@ public class EmailApplication {
     private String logstashPort;
 
 	public static void main(String[] args) {
-		EmailApplication app = new EmailApplication();
+		SrvEmailApplication app = new SrvEmailApplication();
 		app.run(args);
 	}
 
 	public void run(String[] args) {
 		logger.info("Iniciando a aplicação de e-mail");
-		SpringApplication.run(EmailApplication.class, args);
+		SpringApplication.run(SrvEmailApplication.class, args);
 		logger.info("Aplicação de e-mail iniciada com sucesso");
 		logger.info("Logstash host: {}", logstashHost);
 		logger.info("Logstash port: {}", logstashPort);
