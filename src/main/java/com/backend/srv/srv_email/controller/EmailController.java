@@ -33,12 +33,15 @@ public class EmailController {
     public ResponseEntity<String> sendEmail(@RequestBody EmailRequest emailRequest) {
         logger.info("Received request to send email to: {}", emailRequest.getTo());
         try {
-            emailService.sendEmail(emailRequest.getTo(), emailRequest.getSubject(), emailRequest.getText());
+            emailService.sendEmail(emailRequest.getTo(), emailRequest.getSubject(), emailRequest.getParameters());
             logger.info("Email sent successfully to: {}", emailRequest.getTo());
             return ResponseEntity.ok("Email sent successfully");
         } catch (MessagingException e) {
             logger.error("Failed to send email to: {}. Error: {}", emailRequest.getTo(), e.getMessage(), e);
             return ResponseEntity.badRequest().body("Failed to send email: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            logger.error("Invalid email request for: {}. Error: {}", emailRequest.getTo(), e.getMessage(), e);
+            return ResponseEntity.badRequest().body("Invalid email request: " + e.getMessage());
         }
     }
 }

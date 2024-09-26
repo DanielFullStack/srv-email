@@ -148,6 +148,10 @@ mvn clean install -Dspring.profiles.active=local
 ```
 
 ```bash
+mvn spring-boot:run -Dspring-boot.run.profiles=local
+```
+
+```bash
 mvn dependency-check:aggregate -PsonarReports
 ```
 
