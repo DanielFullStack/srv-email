@@ -118,7 +118,7 @@ Este projeto integra-se com o SonarQube para análise de qualidade e segurança 
 
 ### Acesso ao SonarQube
 
-- **URL**: `http://localhost:9001`
+- **URL**: `http://localhost:9000`
 - **Usuário**: `admin`
 - **Senha**: `admin`
 
