@@ -120,7 +120,7 @@ Este projeto integra-se com o SonarQube para análise de qualidade e segurança 
 
 - **URL**: `http://localhost:9001`
 - **Usuário**: `admin`
-- **Senha**: `imagesAdmin`
+- **Senha**: `admin`
 
 Certifique-se de ter o SonarQube configurado e em execução na mesma rede Docker ou acessível para o serviço.
 
