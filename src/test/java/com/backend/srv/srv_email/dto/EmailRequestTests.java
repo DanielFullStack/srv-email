@@ -28,13 +28,6 @@ public class EmailRequestTests {
     }
 
     @Test
-    public void testSetAndGetText() {
-        EmailRequest emailRequest = new EmailRequest();
-        emailRequest.setText("Test email content");
-        assertEquals("Test email content", emailRequest.getText());
-    }
-
-    @Test
     public void testSetAndGetParameters() {
         EmailRequest emailRequest = new EmailRequest();
         Map<String, String> parameters = new HashMap<>();
@@ -49,7 +42,6 @@ public class EmailRequestTests {
         EmailRequest emailRequest1 = new EmailRequest();
         emailRequest1.setTo("test@example.com");
         emailRequest1.setSubject("Test Subject");
-        emailRequest1.setText("Test email content");
         Map<String, String> parameters1 = new HashMap<>();
         parameters1.put("key1", "value1");
         emailRequest1.setParameters(parameters1);
@@ -57,7 +49,6 @@ public class EmailRequestTests {
         EmailRequest emailRequest2 = new EmailRequest();
         emailRequest2.setTo("test@example.com");
         emailRequest2.setSubject("Test Subject");
-        emailRequest2.setText("Test email content");
         Map<String, String> parameters2 = new HashMap<>();
         parameters2.put("key1", "value1");
         emailRequest2.setParameters(parameters2);
@@ -71,7 +62,6 @@ public class EmailRequestTests {
         EmailRequest emailRequest = new EmailRequest();
         emailRequest.setTo("test@example.com");
         emailRequest.setSubject("Test Subject");
-        emailRequest.setText("Test email content");
         Map<String, String> parameters = new HashMap<>();
         parameters.put("key1", "value1");
         emailRequest.setParameters(parameters);
