@@ -1,0 +1,47 @@
+services:
+  srv_email:
+    image: srv_email:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: srv_email
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - ENVIRONMENT=${ENVIRONMENT}
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_PORT=${MAIL_PORT}
+      - MAIL_USERNAME=${MAIL_USERNAME}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - MAIL_TRANSPORT_PROTOCOL=${MAIL_TRANSPORT_PROTOCOL}
+      - MAIL_SMTP_AUTH=${MAIL_SMTP_AUTH}
+      - MAIL_SMTP_STARTTLS_ENABLE=${MAIL_SMTP_STARTTLS_ENABLE}
+      - MAIL_SMTP_STARTTLS_REQUIRED=${MAIL_SMTP_STARTTLS_REQUIRED}
+      - MAIL_SMTP_SSL_ENABLE=${MAIL_SMTP_SSL_ENABLE}
+      - MAIL_SMTP_CONNECTION_TIMEOUT=${MAIL_SMTP_CONNECTION_TIMEOUT}
+      - MAIL_SMTP_TIMEOUT=${MAIL_SMTP_TIMEOUT}
+      - MAIL_SMTP_WRITE_TIMEOUT=${MAIL_SMTP_WRITE_TIMEOUT}
+      - MAIL_DEBUG=${MAIL_DEBUG}
+      - LOGGING_HOST=${LOGGING_HOST}
+      - LOGGING_PORT=${LOGGING_PORT}
+      - SONAR_HOST=${SONAR_HOST}
+      - SONAR_PORT=${SONAR_PORT}
+    networks:
+      - images-network
+  srv_email_sonar-analysis:
+    image: maven:3.8.4-openjdk-17
+    container_name: srv_email_sonar-analysis
+    depends_on:
+      - srv_email
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    entrypoint: ["sh", "-c", "chmod +x ./run-sonar-analysis.sh && ./run-sonar-analysis.sh"]
+    networks:
+      - images-network
+    restart: "no"
+
+networks:
+  images-network:
+    external: true

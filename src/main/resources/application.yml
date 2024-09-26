@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: srv_email
+  profiles:
+    active: "${ENVIRONMENT:}"
+  config:
+    import: 
+      - optional:file:.env[.properties]
+      - optional:file:.env-${spring.profiles.active}
+  mail:
+    host: "${MAIL_HOST:}"
+    port: "${MAIL_PORT:}"
+    username: "${MAIL_USERNAME:}"
+    password: "${MAIL_PASSWORD:}"
+    protocol: "${MAIL_TRANSPORT_PROTOCOL:}"
+    properties:
+      mail:
+        smtp:
+          auth: "${MAIL_SMTP_AUTH:}"
+          starttls:
+            enable: "${MAIL_SMTP_STARTTLS_ENABLE:}"
+            required: "${MAIL_SMTP_STARTTLS_REQUIRED:}"
+          ssl:
+            enable: "${MAIL_SMTP_SSL_ENABLE:}"
+          connection-timeout: "${MAIL_SMTP_CONNECTION_TIMEOUT:}"
+          timeout: "${MAIL_SMTP_TIMEOUT:}"
+          write-timeout: "${MAIL_SMTP_WRITE_TIMEOUT:}"
+        debug: "${MAIL_DEBUG:}"
+  data:
+    mongodb:
+      uri: "${MONGODB_URI:}"
+
+logstash:
+  host: "${LOGGING_HOST:}"
+  port: "${LOGGING_PORT:}"
+
+sonarqube:
+  host: "${SONAR_HOST:}"
+  port: "${SONAR_PORT:}"
