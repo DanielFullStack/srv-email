@@ -28,7 +28,11 @@ spring:
         debug: "${MAIL_DEBUG:}"
   data:
     mongodb:
-      uri: "${MONGODB_URI:}"
+      host: "${MONGODB_HOST:}"
+      port: "${MONGODB_PORT:}"
+      database: "${MONGODB_DATABASE:}"
+      username: "${MONGODB_USERNAME:}"
+      password: "${MONGODB_PASSWORD:}"
 
 logstash:
   host: "${LOGGING_HOST:}"
