@@ -27,11 +27,7 @@ services:
       - LOGGING_PORT=${LOGGING_PORT}
       - SONAR_HOST=${SONAR_HOST}
       - SONAR_PORT=${SONAR_PORT}
-      - MONGODB_HOST=${MONGODB_HOST}
-      - MONGODB_PORT=${MONGODB_PORT}
-      - MONGODB_DATABASE=${MONGODB_DATABASE}
-      - MONGODB_USERNAME=${MONGODB_USERNAME}
-      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
+      - MONGODB_URI=${MONGODB_URI}
     networks:
       - images-network
   srv_email_sonar-analysis:

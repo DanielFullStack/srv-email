@@ -9,29 +9,36 @@ import org.springframework.stereotype.Service;
 
 import com.backend.srv.srv_email.model.EmailTemplate;
 import com.backend.srv.srv_email.repository.EmailTemplateRepository;
+import com.backend.srv.srv_email.dto.EmailTemplateResponse;
+import com.backend.srv.srv_email.mapper.EmailTemplateMapper;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.List;
 
 @Service
 public class EmailService {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
 
+    private final EmailTemplateMapper emailTemplateMapper;
+
     private final JavaMailSender mailSender;
 
     private final EmailTemplateRepository emailTemplateRepository;
 
-    public EmailService(JavaMailSender mailSender, EmailTemplateRepository emailTemplateRepository) {
+    public EmailService(EmailTemplateMapper emailTemplateMapper, JavaMailSender mailSender, EmailTemplateRepository emailTemplateRepository) {
+        this.emailTemplateMapper = emailTemplateMapper;
         this.mailSender = mailSender;
         this.emailTemplateRepository = emailTemplateRepository;
         logger.info("EmailService initialized with JavaMailSender: {}", mailSender);
+    }
+
+    public List<EmailTemplateResponse> getAllTemplates() {
+        List<EmailTemplate> templates = emailTemplateRepository.findAll();
+        return emailTemplateMapper.mapToEmailTemplateResponseList(templates);
     }
 
     public void sendEmail(String to, String subject, Map<String, String> parameters) throws MessagingException {
@@ -43,9 +50,9 @@ public class EmailService {
             throw new IllegalArgumentException("Email template not found");
         }
 
-        validateParameters(template.getTemplateBody(), parameters);
+        emailTemplateMapper.validateParameters(template.getTemplateBody(), parameters);
 
-        String emailContent = fillTemplate(template.getTemplateBody(), parameters);
+        String emailContent = emailTemplateMapper.fillTemplate(template.getTemplateBody(), parameters);
 
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -67,42 +74,4 @@ public class EmailService {
         return emailTemplateRepository.findBySubject(subject);
     }
 
-    private void validateParameters(String template, Map<String, String> parameters) {
-        Set<String> expectedParams = extractParameters(template);
-        Set<String> providedParams = parameters.keySet();
-
-        if (!expectedParams.equals(providedParams)) {
-            Set<String> missingParams = new HashSet<>(expectedParams);
-            missingParams.removeAll(providedParams);
-            Set<String> extraParams = new HashSet<>(providedParams);
-            extraParams.removeAll(expectedParams);
-
-            String errorMessage = "Parameter mismatch. ";
-            if (!missingParams.isEmpty()) {
-                errorMessage += "Missing parameters: " + missingParams + ". ";
-            }
-            if (!extraParams.isEmpty()) {
-                errorMessage += "Extra parameters: " + extraParams + ". ";
-            }
-            logger.error(errorMessage);
-            throw new IllegalArgumentException(errorMessage);
-        }
-    }
-
-    private Set<String> extractParameters(String template) {
-        Set<String> params = new HashSet<>();
-        Pattern pattern = Pattern.compile("\\{\\{(.*?)\\}\\}");
-        Matcher matcher = pattern.matcher(template);
-        while (matcher.find()) {
-            params.add(matcher.group(1));
-        }
-        return params;
-    }
-
-    private String fillTemplate(String template, Map<String, String> parameters) {
-        for (Map.Entry<String, String> entry : parameters.entrySet()) {
-            template = template.replace("{{" + entry.getKey() + "}}", entry.getValue());
-        }
-        return template;
-    }
 }
