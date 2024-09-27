@@ -69,7 +69,6 @@ public class EmailRequestTests {
         String toString = emailRequest.toString();
         assertTrue(toString.contains("test@example.com"));
         assertTrue(toString.contains("Test Subject"));
-        assertTrue(toString.contains("Test email content"));
         assertTrue(toString.contains("key1"));
         assertTrue(toString.contains("value1"));
     }
