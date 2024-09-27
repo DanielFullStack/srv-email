@@ -23,11 +23,10 @@ public class EmailTemplateMapper {
 
     private EmailTemplateResponse mapToEmailTemplateResponse(EmailTemplate template) {
         return new EmailTemplateResponse(
-            template.getId(),
             template.getSubject(),
             template.getTemplateBody(),
             extractParameters(template.getTemplateBody()).stream()
-                .collect(Collectors.toMap(param -> param, param -> ""))
+                .collect(Collectors.toList())
         );
     }
 

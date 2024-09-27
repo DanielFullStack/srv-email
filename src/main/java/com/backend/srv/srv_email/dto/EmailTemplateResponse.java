@@ -1,6 +1,6 @@
 package com.backend.srv.srv_email.dto;
 
-import java.util.Map;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,12 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmailTemplateResponse {
 
-    private String id;
-
     private String subject;
 
     private String templateBody;
 
-    private Map<String, String> parameters;
+    private List<String> parameters;
 
 }
