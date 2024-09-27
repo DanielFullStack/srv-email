@@ -139,8 +139,8 @@ public class EmailServiceTests {
         when(emailTemplateRepository.findAll()).thenReturn(templates);
 
         List<EmailTemplateResponse> expectedResponses = Arrays.asList(
-            new EmailTemplateResponse("65a7b9c83f2d1e4b8c0f2d3e", "Subject 1", "Body 1 {{param1}}", Map.of("param1", "")),
-            new EmailTemplateResponse("65a7b9c83f2d1e4b8c0f2d3f", "Subject 2", "Body 2 {{param2}}", Map.of("param2", ""))
+            new EmailTemplateResponse("Subject 1", "Body 1 {{param1}}", List.of("param1")),
+            new EmailTemplateResponse("Subject 2", "Body 2 {{param2}}", List.of("param2"))
         );
         when(emailTemplateMapper.mapToEmailTemplateResponseList(templates)).thenReturn(expectedResponses);
 
@@ -150,11 +150,11 @@ public class EmailServiceTests {
         assertEquals("Subject 1", result.get(0).getSubject());
         assertEquals("Body 1 {{param1}}", result.get(0).getTemplateBody());
         assertEquals(1, result.get(0).getParameters().size());
-        assertTrue(result.get(0).getParameters().containsKey("param1"));
+        assertTrue(result.get(0).getParameters().contains("param1"));
         assertEquals("Subject 2", result.get(1).getSubject());
         assertEquals("Body 2 {{param2}}", result.get(1).getTemplateBody());
         assertEquals(1, result.get(1).getParameters().size());
-        assertTrue(result.get(1).getParameters().containsKey("param2"));
+        assertTrue(result.get(1).getParameters().contains("param2"));
 
         verify(emailTemplateRepository, times(1)).findAll();
         verify(emailTemplateMapper, times(1)).mapToEmailTemplateResponseList(templates);
